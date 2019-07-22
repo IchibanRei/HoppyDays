@@ -6,6 +6,9 @@ const SPEED = 1500
 const GRAVITY = 150	
 const UP = Vector2(0, -1)
 const JUMP_SPEED = 3500
+const WORLD_LIMIT = 4000
+
+var lives = 3
 
 signal animate
 
@@ -17,6 +20,8 @@ func _process(delta):
 	move_and_slide(motion, UP)
 	
 func apply_gravity():
+	if position.y > WORLD_LIMIT:
+		end_game()
 	if is_on_floor():
 		motion.y = 0
 	elif is_on_ceiling():
@@ -35,6 +40,19 @@ func move():
 func jump():
 	if Input.is_action_pressed("jump") and is_on_floor():
 		motion.y -= JUMP_SPEED
+		$JumpSFX.play()
 		
 func animate():
 	emit_signal("animate", motion)
+
+func end_game():
+	get_tree().change_scene("res://Levels/GameOver.tscn")
+
+func hurt():
+	position.y -= 1
+	yield(get_tree(), "idle_frame")
+	motion.y -= JUMP_SPEED
+	lives -= 1
+	$PainSFX.play()
+	if lives < 0:
+		end_game()
