@@ -15,7 +15,7 @@ height = 80.0301
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 526.298, 405.401 )
-collision_mask = 6
+collision_mask = 14
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -37,6 +37,7 @@ drag_margin_v_enabled = false
 smoothing_enabled = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Camera2D"]
+editor/display_folded = true
 scroll_base_offset = Vector2( 0, -1000 )
 scroll_ignore_camera_zoom = true
 
