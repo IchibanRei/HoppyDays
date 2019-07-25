@@ -28,6 +28,10 @@ func coin_up():
 func life_up():
 	lives +=1
 	update_GUI()
-	
+
+func win_game():
+	get_tree().change_scene("res://Levels/Victory.tscn")
+
+
 func end_game():
 	get_tree().change_scene("res://Levels/GameOver.tscn")
